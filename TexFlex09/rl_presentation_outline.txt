@@ -1,0 +1,66 @@
+Introduction to Robotlegs
+
+I. Why does Robotlegs Exist?
+	1. problems with existing frameworks
+		a. should I even go into the negatives?
+	2. goals of Robotlegs
+		a. maintainability
+		b. extensibility
+		c. portability
+		d. testability
+II. What is Robotlegs?
+	1. Relationship to PureMVC
+		a. similarities
+			aa. Structure
+			bb. Underlying principles
+			cc. MVC implementation
+		a. differences (again with the negatives)
+			aa. no Singletons, Globaltons, and Multitons
+			bb. avoids casting casting for general framework activities
+			cc. avoids boilerplate code
+			dd. automated dependency injection
+	2. Architecture
+		a. Model (proxies)
+			aa. holds reference to model, data
+			bb. provides api to manipulate data
+			cc. dispatches Events when model has changed
+			dd. does NOT listen for Events
+		b. View (mediators)
+			aa. holds reference to a view component
+			bb. exposes api for manipulating view component
+			cc. Listens for events on view component, notifies system of these events
+			dd. Listens for Events and manipulates view components in response
+		c. Controller (commands)
+			aa. Orchestrates complex interactions between model and view
+			bb. Executes in response to an Event
+			cc. Manipulates Mediators and Proxies via exposed APIs
+			dd. Dispatches Notifications
+			ee. does NOT listen for Notifications
+			ff. short lived. available for GC immediately after execution
+		d. Service
+			aa. Connects to external services/providers
+			bb. Is fundamentally the same as a Proxy in functionality
+			cc. Exists to provide context and keep service interaction out of the model
+		e. Context
+			aa. provides frameworks actors boundaries within an application
+			bb. application can have multiple contexts
+		f. Events (EventDispatcher)
+			aa. Native flash events
+			bb. Custom events provide strong typing for framework notifications
+III. What Can Robotlegs do for Me?
+	1. Testability
+		a. No GoF Singletons
+		b. Encourages loose coupling
+		c. Encourages Separation of Responsibilities
+		d. Encourages Use of interfaces over implementations
+	2. Rapid development
+		a. Less code in classes
+		b. Loose coupling for faster refactoring
+	3. Clarity
+		a. Less code in classes
+		b. Clearly defined roles and responsibilities
+	4. Portability/Reusue
+		a. Seperation of responsibility
+		b. loose coupling
+		c. no logic on the view
+		b. model is isolated
